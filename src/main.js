@@ -1,24 +1,54 @@
 import './style.css'
-import javascriptLogo from './javascript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.js'
+import { createNavigation } from './navigation.js'
 
-document.querySelector('#app').innerHTML = `
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-    </a>
-    <h1>Hello Vite!</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
-  </div>
-`
+document.querySelector('#app').innerHTML = ''
 
-setupCounter(document.querySelector('#counter'))
+// Create navigation
+const nav = createNavigation({
+  brand: { text: 'My App', href: '#' },
+  links: [
+    { text: 'Home', href: '#', active: true },
+    { text: 'About', href: '#' },
+    { text: 'Services', href: '#' },
+    { text: 'Contact', href: '#' }
+  ]
+});
+
+// Create main content container
+const mainContent = document.createElement('div');
+mainContent.className = 'main-content';
+
+// Create heading
+const heading = document.createElement('h1');
+heading.textContent = 'Navigation Component Demo';
+heading.style.color = '#646cff';
+heading.style.marginBottom = '2rem';
+
+// Create navigation examples section
+const navSection = document.createElement('section');
+navSection.className = 'demo-section';
+
+const navTitle = document.createElement('h2');
+navTitle.textContent = 'Navigation Component Examples';
+navTitle.style.color = 'rgba(255, 255, 255, 0.87)';
+navTitle.style.marginBottom = '1rem';
+
+navSection.appendChild(navTitle);
+
+// Create description
+const description = document.createElement('p');
+description.textContent = 'This navigation component includes a brand/logo section and multiple navigation links. The active link is highlighted, and all links are clickable.';
+description.style.color = 'rgba(255, 255, 255, 0.7)';
+description.style.marginBottom = '2rem';
+description.style.maxWidth = '600px';
+description.style.lineHeight = '1.6';
+
+navSection.appendChild(description);
+
+// Add sections to main content
+mainContent.appendChild(heading);
+mainContent.appendChild(navSection);
+
+// Append everything to app
+document.querySelector('#app').appendChild(nav);
+document.querySelector('#app').appendChild(mainContent);
